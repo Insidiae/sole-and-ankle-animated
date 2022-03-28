@@ -153,26 +153,45 @@ const Flag = styled.div`
   */
   z-index: 1;
 
-  /*
-    There might be a better way to animate this
-    than simply increasing the padding-right idk
-  */
+  background-color: var(--background);
+  --transition-exit: transform 600ms;
+  --transition-enter: transform 200ms;
+  --faux-padding: 24px;
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    transition: padding-right 600ms;
+    transition: var(--transition-exit);
+
+    &::after {
+      display: block;
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: var(--background);
+      z-index: -1;
+      transition: var(--transition-exit);
+    }
 
     ${Link}:hover &,
     ${Link}:focus & {
-      padding-right: 30px;
-      transition: padding-right 200ms;
+      transform: translateX(calc(var(--faux-padding) * -1));
+      transition: var(--transition-enter);
+    }
+
+    ${Link}:hover &::after,
+    ${Link}:focus &::after {
+      transform: translateX(var(--faux-padding));
+      transition: var(--transition-enter);
     }
   }
 `;
 
 const SaleFlag = styled(Flag)`
-  background-color: var(--color-primary);
+  --background: var(--color-primary);
 `;
 const NewFlag = styled(Flag)`
-  background-color: var(--color-secondary);
+  --background: var(--color-secondary);
 `;
 
 export default ShoeCard;
