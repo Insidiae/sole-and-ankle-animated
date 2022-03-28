@@ -92,16 +92,19 @@ const ImageWrapper = styled.div`
 const Image = styled.img`
   display: block;
   width: 100%;
-  transition: transform 600ms;
+  transition: transform 600ms, filter 600ms;
   will-change: transform;
   /* Optical centering */
   transform-origin: 50% 75%;
 
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    filter: brightness(90%);
+
     ${Link}:hover &,
     ${Link}:focus & {
       transform: scale(1.1);
-      transition: transform 200ms;
+      filter: brightness(100%);
+      transition: transform 200ms, filter 200ms;
     }
   }
 `;
@@ -149,6 +152,19 @@ const Flag = styled.div`
     you might or might not need to apply a z-index here
   */
   z-index: 1;
+
+  /*
+    There might be a better way to animate this
+    than simply increasing the padding-right idk
+  */
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    transition: padding-right 600ms;
+
+    ${Link}:hover & {
+      padding-right: 30px;
+      transition: padding-right 200ms;
+    }
+  }
 `;
 
 const SaleFlag = styled(Flag)`
