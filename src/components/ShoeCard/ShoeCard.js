@@ -160,7 +160,8 @@ const Flag = styled.div`
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
     transition: padding-right 600ms;
 
-    ${Link}:hover & {
+    ${Link}:hover &,
+    ${Link}:focus & {
       padding-right: 30px;
       transition: padding-right 200ms;
     }
