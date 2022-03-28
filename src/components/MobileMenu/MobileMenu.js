@@ -14,26 +14,24 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
     <Wrapper isOpen={isOpen} onDismiss={onDismiss}>
       <Backdrop />
       <Content aria-label="Menu">
-        <InnerWrapper>
-          <CloseButton onClick={onDismiss}>
-            <Icon id="close" />
-            <VisuallyHidden>Dismiss menu</VisuallyHidden>
-          </CloseButton>
-          <Filler />
-          <Nav>
-            <NavLink href="/sale">Sale</NavLink>
-            <NavLink href="/new">New&nbsp;Releases</NavLink>
-            <NavLink href="/men">Men</NavLink>
-            <NavLink href="/women">Women</NavLink>
-            <NavLink href="/kids">Kids</NavLink>
-            <NavLink href="/collections">Collections</NavLink>
-          </Nav>
-          <Footer>
-            <SubLink href="/terms">Terms and Conditions</SubLink>
-            <SubLink href="/privacy">Privacy Policy</SubLink>
-            <SubLink href="/contact">Contact Us</SubLink>
-          </Footer>
-        </InnerWrapper>
+        <CloseButton onClick={onDismiss}>
+          <Icon id="close" />
+          <VisuallyHidden>Dismiss menu</VisuallyHidden>
+        </CloseButton>
+        <Filler />
+        <Nav>
+          <NavLink href="/sale">Sale</NavLink>
+          <NavLink href="/new">New&nbsp;Releases</NavLink>
+          <NavLink href="/men">Men</NavLink>
+          <NavLink href="/women">Women</NavLink>
+          <NavLink href="/kids">Kids</NavLink>
+          <NavLink href="/collections">Collections</NavLink>
+        </Nav>
+        <Footer>
+          <SubLink href="/terms">Terms and Conditions</SubLink>
+          <SubLink href="/privacy">Privacy Policy</SubLink>
+          <SubLink href="/contact">Contact Us</SubLink>
+        </Footer>
       </Content>
     </Wrapper>
   );
@@ -51,11 +49,11 @@ const fadeIn = keyframes`
 
 const slideIn = keyframes`
   from {
-    transform: translateX(100%);
+    transform: rotateY(-90deg);
   }
 
   to {
-    transform: translateX(0);
+    transform: rotateY(0);
   }
 `;
 
@@ -81,40 +79,38 @@ const Backdrop = styled.div`
 `;
 
 const Content = styled(DialogContent)`
-  --overfill: 16px;
   position: relative;
   background: white;
-  width: calc(300px + var(--overfill));
+  width: 300px;
   height: 100%;
-  margin-right: calc(var(--overfill) * -1);
   padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
 
   @media (prefers-reduced-motion: no-preference) {
+    transform-origin: right;
     animation: ${slideIn} 500ms both cubic-bezier(0, 0.6, 0.32, 1.06);
     animation-delay: 200ms;
   }
 `;
 
-const InnerWrapper = styled.div`
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-
-  animation: ${fadeIn} 600ms both;
-  animation-delay: 400ms;
-`;
-
 const CloseButton = styled(UnstyledButton)`
   position: absolute;
   top: 10px;
-  right: var(--overfill);
+  right: 0;
   padding: 16px;
+
+  animation: ${fadeIn} 600ms both;
+  animation-delay: 400ms;
 `;
 
 const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  animation: ${fadeIn} 600ms both;
+  animation-delay: 400ms;
 `;
 
 const NavLink = styled.a`
@@ -138,6 +134,9 @@ const Footer = styled.footer`
   flex-direction: column;
   gap: 14px;
   justify-content: flex-end;
+
+  animation: ${fadeIn} 600ms both;
+  animation-delay: 600ms;
 `;
 
 const SubLink = styled.a`
